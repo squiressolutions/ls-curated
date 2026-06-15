@@ -264,9 +264,89 @@
   .toast.show { transform:translateY(0); opacity:1; }
   .toast.error { background:#1a0a0a; border-left-color:#c07070; }
 
+  /* ── LOADER ── */
+  #loader {
+    position:fixed; inset:0; background:var(--black); z-index:9999;
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+  .loader-monogram {
+    font-family:'Playfair Display',serif; font-size:4rem; font-style:italic;
+    color:var(--green); opacity:0; transform:scale(0.85);
+    animation:loaderPop 1.6s ease forwards;
+  }
+  @keyframes loaderPop {
+    0%   { opacity:0; transform:scale(0.85); }
+    40%  { opacity:1; transform:scale(1); }
+    75%  { opacity:1; transform:scale(1); }
+    100% { opacity:0; transform:scale(1.08); }
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  .cursor-dot  { width:6px;  height:6px;  background:var(--green); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:transform 0.1s, background 0.3s; }
+  .cursor-ring { width:28px; height:28px; border:1.5px solid rgba(58,87,64,0.5); border-radius:50%; position:fixed; pointer-events:none; z-index:9997; transform:translate(-50%,-50%); transition:width 0.3s, height 0.3s, border-color 0.3s; }
+  body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width:44px; height:44px; border-color:var(--green); }
+  @media(hover:none) { .cursor-dot, .cursor-ring { display:none; } }
+
+  /* ── NAV SCROLL ── */
+  nav.scrolled { padding:0.65rem 3rem; background:rgba(10,10,10,0.98); }
+  @media(max-width:960px) { nav.scrolled { padding:0.65rem 1.25rem; } }
+
   /* ── REVEAL ── */
-  .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.75s ease, transform 0.75s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-left  { opacity:0; transform:translateX(-30px); transition:opacity 0.75s ease, transform 0.75s ease; }
+  .reveal-left.visible  { opacity:1; transform:translateX(0); }
+  .reveal-right { opacity:0; transform:translateX(30px); transition:opacity 0.75s ease, transform 0.75s ease; }
+  .reveal-right.visible { opacity:1; transform:translateX(0); }
+
+  /* staggered children */
+  .stagger > * { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:0.05s; }
+  .stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:0.15s; }
+  .stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:0.25s; }
+  .stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:0.35s; }
+  .stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:0.45s; }
+  .stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:0.55s; }
+
+  /* ── PARALLAX HERO ── */
+  .hero-bg { will-change:transform; }
+
+  /* ── BUTTON SHINE ── */
+  .btn-green { position:relative; overflow:hidden; }
+  .btn-green::after { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent); transform:skewX(-20deg); transition:left 0.55s ease; }
+  .btn-green:hover::after { left:160%; }
+
+  /* ── SERVICE CARD HOVER ── */
+  .service-card { transition:background 0.3s, transform 0.3s, box-shadow 0.3s; }
+  .service-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,0.1); }
+  .service-num { transition:color 0.4s, transform 0.4s; }
+  .service-card:hover .service-num { color:rgba(58,87,64,0.35); transform:scale(1.08); }
+
+  /* ── ABOUT IMAGE HOVER ── */
+  .about-img-main { transition:transform 0.6s ease; }
+  .about-img:hover .about-img-main { transform:scale(1.02); }
+
+  /* ── SECTION TITLE UNDERLINE DRAW ── */
+  .section-title { position:relative; display:inline-block; }
+
+  /* ── PROCESS STEP HOVER ── */
+  .process-step { transition:background 0.3s; }
+  .process-step:hover { background:rgba(244,239,230,0.03); }
+  .process-step-num { transition:color 0.4s; }
+  .process-step:hover .process-step-num { color:rgba(244,239,230,0.15); }
+
+  /* ── CONTACT ITEM HOVER ── */
+  .contact-item { transition:background 0.3s; }
+  .contact-item:hover { background:rgba(58,87,64,0.08); }
+
+  /* ── TRUST BAR MARQUEE (mobile) ── */
+  @media(max-width:700px) {
+    .trust-bar { flex-wrap:nowrap; overflow:hidden; justify-content:flex-start; gap:0; padding:0; }
+    .trust-marquee { display:flex; gap:3rem; padding:0.85rem 1.5rem; animation:marquee 18s linear infinite; white-space:nowrap; }
+    @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  }
 
   /* ── RESPONSIVE ── */
   @media(max-width:960px) {
@@ -322,6 +402,13 @@
 </head>
 <body>
 
+<!-- LOADER -->
+<div id="loader"><div class="loader-monogram">LS</div></div>
+
+<!-- CURSOR (desktop only) -->
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
 <!-- NAV -->
 <nav id="mainNav">
   <a href="#" class="nav-brand">
@@ -372,11 +459,19 @@
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
-  <div class="trust-item">Residential Design</div>
-  <div class="trust-item">Commercial Interiors</div>
-  <div class="trust-item">Space Planning</div>
-  <div class="trust-item">Full-Service Styling</div>
-  <div class="trust-item">St. Louis, MO</div>
+  <div class="trust-marquee">
+    <div class="trust-item">Residential Design</div>
+    <div class="trust-item">Commercial Interiors</div>
+    <div class="trust-item">Space Planning</div>
+    <div class="trust-item">Full-Service Styling</div>
+    <div class="trust-item">St. Louis, MO</div>
+    <!-- duplicate for seamless loop -->
+    <div class="trust-item">Residential Design</div>
+    <div class="trust-item">Commercial Interiors</div>
+    <div class="trust-item">Space Planning</div>
+    <div class="trust-item">Full-Service Styling</div>
+    <div class="trust-item">St. Louis, MO</div>
+  </div>
 </div>
 
 <!-- ABOUT -->
@@ -413,7 +508,7 @@
       <h2 class="section-title">Services designed to <em>elevate</em></h2>
       <p class="section-sub">Whether you need a single room refresh or a full home transformation, LS Curated Design delivers an experience as refined as the result.</p>
     </div>
-    <div class="services-grid reveal">
+    <div class="services-grid stagger">
       <div class="service-card">
         <div class="service-num">01</div>
         <div class="service-name">Interior Design Consultation</div>
@@ -456,7 +551,7 @@
       <h2 class="section-title">A seamless process,<br>start to finish.</h2>
       <p class="section-sub">Four clear steps from your first inquiry to a fully transformed space.</p>
     </div>
-    <div class="process-grid reveal">
+    <div class="process-grid stagger">
       <div class="process-step">
         <div class="process-step-num">01</div>
         <div class="process-step-name">Discovery Call</div>
@@ -607,6 +702,35 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ── Loader ───────────────────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1700)
+})
+
+// ── Custom Cursor ─────────────────────────────────────────────────────────────
+const dot  = document.getElementById('cursorDot')
+const ring = document.getElementById('cursorRing')
+let mx = 0, my = 0, rx = 0, ry = 0
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px' })
+;(function animRing() {
+  rx += (mx - rx) * 0.12
+  ry += (my - ry) * 0.12
+  ring.style.left = rx+'px'; ring.style.top = ry+'px'
+  requestAnimationFrame(animRing)
+})()
+
+// ── Nav shrink on scroll ──────────────────────────────────────────────────────
+const nav = document.getElementById('mainNav')
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60)
+}, { passive:true })
+
+// ── Parallax hero ─────────────────────────────────────────────────────────────
+const heroBg = document.querySelector('.hero-bg')
+window.addEventListener('scroll', () => {
+  if (window.innerWidth > 768) heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`
+}, { passive:true })
+
 // ── Mobile Menu ──────────────────────────────────────────────────────────────
 function toggleMenu() {
   const menu = document.getElementById('mobileMenu')
@@ -618,9 +742,11 @@ function toggleMenu() {
 
 // ── Reveal on scroll ─────────────────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } })
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
+  })
 }, { threshold: 0.07 })
-document.querySelectorAll('.reveal').forEach(r => observer.observe(r))
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger').forEach(r => observer.observe(r))
 
 // ── Toast ────────────────────────────────────────────────────────────────────
 function showToast(msg, isError) {
