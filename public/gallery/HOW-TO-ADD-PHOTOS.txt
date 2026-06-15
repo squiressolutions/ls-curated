@@ -1,0 +1,23 @@
+HOW TO ADD BEFORE & AFTER PHOTOS
+==================================
+
+1. Name your files like this:
+      living-room-before.jpg
+      living-room-after.jpg
+
+      bedroom-before.jpg
+      bedroom-after.jpg
+
+      kitchen-before.jpg
+      kitchen-after.jpg
+
+   The part before "-before" or "-after" becomes the project label on the site.
+   Dashes become spaces and are capitalized automatically.
+
+2. Drop the files into this folder (public/gallery/).
+
+3. Commit and push to GitHub — Render will redeploy automatically.
+
+Supported formats: .jpg .jpeg .png .webp
+
+The slider will auto-load all pairs. No code changes needed.

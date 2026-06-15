@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>LS Curated Design, LLC | Interior Design &middot; St. Louis, MO</title>
+<meta name="description" content="LS Curated Design, LLC — Luxury interior design services in St. Louis, MO. Transforming spaces into elevated, curated environments.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:      #3a5740;
+    --green-dark: #2a3f2e;
+    --green-mid:  #4a6e52;
+    --green-pale: #eef3ee;
+    --black:      #0a0a0a;
+    --charcoal:   #1c1c1c;
+    --cream:      #f4efe6;
+    --off-white:  #faf7f2;
+    --warm-gray:  #8a8278;
+    --light:      #e4ddd3;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; overflow-x:hidden; }
+  body { font-family:'DM Sans',sans-serif; background:var(--off-white); color:var(--black); overflow-x:hidden; }
+  img  { max-width:100%; height:auto; display:block; }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1rem 3rem;
+    background:rgba(10,10,10,0.95);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(58,87,64,0.3);
+    transition:all 0.3s;
+  }
+  .nav-brand { text-decoration:none; display:flex; align-items:center; gap:0.85rem; }
+  .nav-monogram {
+    width:40px; height:40px; background:var(--green); border-radius:2px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:500;
+    font-style:italic; color:var(--cream); letter-spacing:-0.5px; flex-shrink:0;
+  }
+  .nav-name { font-family:'Playfair Display',serif; font-size:1rem; font-style:italic; color:var(--cream); line-height:1.1; }
+  .nav-sub  { font-size:0.6rem; font-weight:400; color:rgba(244,239,230,0.4); letter-spacing:0.2em; text-transform:uppercase; margin-top:1px; }
+  .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
+  .nav-links a { font-size:0.75rem; color:rgba(244,239,230,0.6); text-decoration:none; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.3s; }
+  .nav-links a:hover { color:var(--cream); }
+  .nav-cta { padding:0.55rem 1.5rem; background:var(--green) !important; color:var(--cream) !important; border-radius:2px; transition:background 0.3s !important; }
+  .nav-cta:hover { background:var(--green-mid) !important; }
+
+  .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+  .hamburger span { display:block; width:22px; height:1.5px; background:var(--cream); transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+  .mobile-menu {
+    display:none; position:fixed; inset:0; background:var(--black); z-index:200;
+    flex-direction:column; align-items:center; justify-content:center; gap:2.5rem;
+  }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu-brand { font-family:'Playfair Display',serif; font-size:2rem; font-style:italic; color:var(--green-pale); margin-bottom:0.5rem; }
+  .mobile-menu a { font-size:0.9rem; color:rgba(244,239,230,0.7); text-decoration:none; letter-spacing:0.15em; text-transform:uppercase; }
+  .mobile-menu a.m-cta { color:var(--green-pale); border-bottom:1px solid var(--green); padding-bottom:2px; }
+  .mobile-close { position:absolute; top:1.5rem; right:1.75rem; background:none; border:none; color:rgba(244,239,230,0.3); font-size:1.8rem; cursor:pointer; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height:100vh; position:relative; overflow:hidden;
+    display:flex; align-items:flex-end;
+    background:var(--black);
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=85&fit=crop') center/cover no-repeat;
+    opacity:0.45;
+  }
+  .hero-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.1) 100%);
+  }
+  .hero-content {
+    position:relative; z-index:2;
+    padding:0 3rem 5rem; max-width:760px;
+  }
+  .hero-eyebrow { display:inline-block; border:1px solid rgba(58,87,64,0.6); color:var(--green-pale); font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; padding:0.3rem 1.1rem; margin-bottom:1.75rem; }
+  .hero-title { font-family:'Playfair Display',serif; font-size:clamp(3rem,7vw,6rem); font-weight:400; color:var(--cream); line-height:1.05; margin-bottom:1.25rem; }
+  .hero-title em { color:var(--green-pale); font-style:italic; }
+  .hero-sub { font-size:0.95rem; font-weight:300; color:rgba(244,239,230,0.6); line-height:1.9; max-width:480px; margin-bottom:2.5rem; }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn-green  { padding:0.9rem 2.5rem; background:var(--green); color:var(--cream); text-decoration:none; font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; transition:background 0.3s; }
+  .btn-green:hover { background:var(--green-mid); }
+  .btn-ghost  { padding:0.9rem 2.5rem; background:transparent; color:rgba(244,239,230,0.7); text-decoration:none; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; border:1px solid rgba(244,239,230,0.25); transition:all 0.3s; }
+  .btn-ghost:hover { border-color:var(--green-pale); color:var(--cream); }
+
+  .hero-stats { position:absolute; bottom:5rem; right:3rem; z-index:2; display:flex; gap:2.5rem; }
+  .stat-item { text-align:right; }
+  .stat-val { font-family:'Playfair Display',serif; font-size:2rem; font-style:italic; color:var(--green-pale); line-height:1; }
+  .stat-lbl { font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(244,239,230,0.35); margin-top:3px; }
+
+  /* ── TRUST BAR ── */
+  .trust-bar { background:var(--green); padding:0.9rem 3rem; display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; }
+  .trust-item { font-size:0.7rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:rgba(244,239,230,0.85); display:flex; align-items:center; gap:0.6rem; }
+  .trust-item::before { content:''; width:3px; height:3px; border-radius:50%; background:rgba(244,239,230,0.5); flex-shrink:0; }
+
+  /* ── SECTIONS ── */
+  .section { padding:6rem 3rem; }
+  .section-inner { max-width:1200px; margin:0 auto; }
+  .section-eyebrow { font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--green); margin-bottom:0.75rem; display:block; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:400; color:var(--black); line-height:1.2; margin-bottom:0.75rem; }
+  .section-title em { font-style:italic; color:var(--green); }
+  .section-sub { font-size:0.88rem; font-weight:300; line-height:1.9; color:var(--warm-gray); max-width:540px; }
+
+  /* ── ABOUT ── */
+  .about-bg { background:var(--black); }
+  .about-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+  .about-img { position:relative; }
+  .about-img-main { width:100%; aspect-ratio:3/4; object-fit:cover; }
+  .about-img-accent {
+    position:absolute; bottom:-2rem; right:-2rem;
+    width:55%; aspect-ratio:1; object-fit:cover;
+    border:4px solid var(--black);
+  }
+  .about-badge {
+    position:absolute; top:1.5rem; left:-1.5rem;
+    background:var(--green); padding:1.25rem 1.5rem;
+    min-width:130px; text-align:center;
+  }
+  .about-badge-num { font-family:'Playfair Display',serif; font-size:2rem; font-style:italic; color:var(--cream); line-height:1; }
+  .about-badge-lbl { font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(244,239,230,0.7); margin-top:3px; }
+  .about-text .section-title { color:var(--cream); }
+  .about-text .section-sub   { color:rgba(244,239,230,0.5); }
+  .about-text .section-eyebrow { color:var(--green-pale); }
+  .about-values { display:flex; flex-direction:column; gap:1rem; margin-top:2rem; }
+  .about-value { display:flex; gap:1rem; align-items:flex-start; }
+  .value-line { width:24px; height:1.5px; background:var(--green); margin-top:10px; flex-shrink:0; }
+  .value-text { font-size:0.85rem; color:rgba(244,239,230,0.6); line-height:1.7; }
+  .value-text strong { color:var(--cream); font-weight:500; }
+
+  /* ── SERVICES ── */
+  .services-bg { background:var(--cream); }
+  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--light); margin-top:3rem; }
+  .service-card { background:var(--off-white); padding:2.5rem 2rem; transition:background 0.3s; position:relative; overflow:hidden; }
+  .service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--green); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+  .service-card:hover { background:var(--cream); }
+  .service-card:hover::before { transform:scaleX(1); }
+  .service-num { font-family:'Playfair Display',serif; font-size:3.5rem; font-weight:400; font-style:italic; color:rgba(58,87,64,0.12); line-height:1; margin-bottom:1rem; }
+  .service-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; color:var(--black); margin-bottom:0.6rem; }
+  .service-desc { font-size:0.82rem; font-weight:300; color:var(--warm-gray); line-height:1.8; }
+
+  /* ── PROCESS ── */
+  .process-bg { background:var(--green-dark); }
+  .process-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:3.5rem; border:1px solid rgba(244,239,230,0.08); }
+  .process-step { padding:2.5rem 2rem; border-right:1px solid rgba(244,239,230,0.08); position:relative; }
+  .process-step:last-child { border-right:none; }
+  .process-step-num { font-family:'Playfair Display',serif; font-size:3rem; font-weight:400; font-style:italic; color:rgba(244,239,230,0.08); line-height:1; margin-bottom:1.25rem; }
+  .process-step-name { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--cream); margin-bottom:0.6rem; }
+  .process-step-desc { font-size:0.8rem; color:rgba(244,239,230,0.45); line-height:1.8; }
+  .process-bg .section-title { color:var(--cream); }
+  .process-bg .section-eyebrow { color:rgba(244,239,230,0.5); }
+  .process-bg .section-sub { color:rgba(244,239,230,0.45); }
+
+  /* ── GALLERY / BEFORE & AFTER ── */
+  .gallery-bg { background:var(--black); }
+  .gallery-bg .section-title { color:var(--cream); }
+  .gallery-bg .section-eyebrow { color:rgba(58,87,64,0.9); }
+  .gallery-bg .section-sub { color:rgba(244,239,230,0.4); }
+  .gallery-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:3rem; }
+  .gallery-placeholder { aspect-ratio:4/3; background:var(--charcoal); display:grid; grid-template-columns:repeat(2,1fr); gap:2px; overflow:hidden; position:relative; }
+
+  /* Before/After comparison slider */
+  .ba-wrap { position:relative; overflow:hidden; aspect-ratio:4/3; cursor:col-resize; user-select:none; }
+  .ba-after { position:absolute; inset:0; }
+  .ba-after img { width:100%; height:100%; object-fit:cover; }
+  .ba-before {
+    position:absolute; inset:0; overflow:hidden;
+    width:50%;
+    transition:none;
+  }
+  .ba-before img { width:100%; height:100%; object-fit:cover; min-width:200%; }
+  .ba-divider {
+    position:absolute; top:0; bottom:0; left:50%;
+    width:2px; background:rgba(244,239,230,0.9);
+    transform:translateX(-50%); z-index:3;
+  }
+  .ba-handle {
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:38px; height:38px; background:var(--cream);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:0.7rem; font-weight:700; color:var(--black);
+    box-shadow:0 2px 12px rgba(0,0,0,0.4);
+    z-index:4; pointer-events:none;
+    letter-spacing:-1px;
+  }
+  .ba-labels { position:absolute; top:1rem; left:0; right:0; display:flex; justify-content:space-between; padding:0 1rem; z-index:5; pointer-events:none; }
+  .ba-label { font-size:0.6rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:0.25rem 0.7rem; border-radius:2px; }
+  .ba-label.before { background:rgba(10,10,10,0.7); color:rgba(244,239,230,0.8); }
+  .ba-label.after  { background:rgba(58,87,64,0.85); color:var(--cream); }
+  .ba-project-name { padding:0.85rem 1.1rem; background:var(--charcoal); font-size:0.78rem; font-weight:500; color:rgba(244,239,230,0.7); letter-spacing:0.06em; }
+
+  .gallery-empty { grid-column:1/-1; padding:4rem 2rem; text-align:center; border:1px dashed rgba(244,239,230,0.1); border-radius:4px; }
+  .gallery-empty p { color:rgba(244,239,230,0.25); font-size:0.85rem; line-height:1.8; }
+
+  /* ── QUOTE FORM ── */
+  .quote-bg { background:var(--cream); }
+  .quote-inner { display:grid; grid-template-columns:1fr 1.5fr; gap:5rem; align-items:start; }
+  .quote-info { position:sticky; top:7rem; }
+  .quote-info-item { display:flex; gap:1rem; margin-top:2rem; align-items:flex-start; }
+  .qi-line { width:20px; height:1.5px; background:var(--green); margin-top:9px; flex-shrink:0; }
+  .qi-text { font-size:0.84rem; color:var(--warm-gray); line-height:1.7; }
+  .qi-text strong { color:var(--black); font-weight:500; display:block; margin-bottom:2px; }
+
+  .form-box { background:var(--off-white); border:1px solid var(--light); padding:2.5rem; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+  .form-full { grid-column:1/-1; }
+  .field { display:flex; flex-direction:column; gap:0.35rem; }
+  .field label { font-size:0.65rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--black); }
+  .field input, .field select, .field textarea {
+    padding:0.85rem 1rem; border:1px solid var(--light);
+    background:var(--cream); font-family:'DM Sans',sans-serif;
+    font-size:0.86rem; color:var(--black); outline:none;
+    transition:border-color 0.25s; -webkit-appearance:none; border-radius:0;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--green); background:#fff; }
+  .field input::placeholder, .field textarea::placeholder { color:#bbb; }
+  .field textarea { resize:vertical; min-height:110px; }
+  .btn-submit {
+    width:100%; padding:1.05rem; background:var(--green); border:none;
+    color:var(--cream); font-family:'DM Sans',sans-serif; font-size:0.78rem;
+    font-weight:500; letter-spacing:0.2em; text-transform:uppercase;
+    cursor:pointer; margin-top:0.5rem; transition:background 0.3s;
+  }
+  .btn-submit:hover { background:var(--green-mid); }
+  .btn-submit:disabled { opacity:0.5; cursor:not-allowed; }
+  .form-note { text-align:center; font-size:0.72rem; color:var(--warm-gray); margin-top:0.9rem; }
+  .form-note a { color:var(--green); text-decoration:none; }
+
+  /* ── CONTACT ── */
+  .contact-bg { background:var(--black); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border:1px solid rgba(244,239,230,0.06); margin-top:3.5rem; }
+  .contact-item { padding:2.5rem 2rem; border-right:1px solid rgba(244,239,230,0.06); }
+  .contact-item:last-child { border-right:none; }
+  .contact-label { font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green-pale); margin-bottom:0.85rem; display:block; }
+  .contact-value { font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--cream); line-height:1.5; }
+  .contact-value a { color:var(--cream); text-decoration:none; }
+  .contact-value a:hover { color:var(--green-pale); }
+  .contact-bg .section-title { color:var(--cream); }
+  .contact-bg .section-eyebrow { color:rgba(244,239,230,0.35); }
+
+  /* ── FOOTER ── */
+  footer { background:var(--green-dark); padding:3rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; border-top:1px solid rgba(244,239,230,0.1); }
+  .footer-brand { font-family:'Playfair Display',serif; font-size:1.4rem; font-style:italic; color:rgba(244,239,230,0.8); }
+  .footer-sub { font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(244,239,230,0.3); margin-top:4px; }
+  .footer-right { font-size:0.72rem; color:rgba(244,239,230,0.25); line-height:2; text-align:right; }
+
+  /* ── TOAST ── */
+  .toast { position:fixed; bottom:2rem; right:2rem; background:var(--charcoal); color:var(--cream); padding:1rem 1.75rem; font-size:0.8rem; border-left:3px solid var(--green); transform:translateY(100px); opacity:0; transition:all 0.4s; z-index:999; max-width:320px; line-height:1.5; }
+  .toast.show { transform:translateY(0); opacity:1; }
+  .toast.error { background:#1a0a0a; border-left-color:#c07070; }
+
+  /* ── REVEAL ── */
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:960px) {
+    nav { padding:0.9rem 1.25rem; }
+    .nav-links { display:none; }
+    .hamburger { display:flex; }
+    .hero-content { padding:0 1.5rem 4rem; }
+    .hero-stats { display:none; }
+    .section { padding:4rem 1.25rem; }
+    .trust-bar { padding:1rem 1.25rem; gap:1.5rem; }
+    .about-inner { grid-template-columns:1fr; gap:3rem; }
+    .about-img-accent { display:none; }
+    .about-badge { top:1rem; left:1rem; }
+    .services-grid { grid-template-columns:1fr 1fr; }
+    .process-grid { grid-template-columns:1fr 1fr; }
+    .process-step { border-right:none; border-bottom:1px solid rgba(244,239,230,0.08); }
+    .gallery-grid { grid-template-columns:1fr; }
+    .quote-inner { grid-template-columns:1fr; gap:2.5rem; }
+    .quote-info { position:static; }
+    .contact-grid { grid-template-columns:1fr; }
+    .contact-item { border-right:none; border-bottom:1px solid rgba(244,239,230,0.06); }
+    .contact-item:last-child { border-bottom:none; }
+    footer { flex-direction:column; text-align:center; padding:2rem 1.25rem; }
+    .footer-right { text-align:center; }
+  }
+  @media(max-width:560px) {
+    .services-grid { grid-template-columns:1fr; }
+    .process-grid { grid-template-columns:1fr; }
+    .form-grid { grid-template-columns:1fr; }
+    .hero-btns { flex-direction:column; }
+    .btn-green, .btn-ghost { text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-brand">
+    <div class="nav-monogram">LS</div>
+    <div>
+      <div class="nav-name">LS Curated Design</div>
+      <div class="nav-sub">Interior Design &middot; LLC</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#quote" class="nav-cta">Request a Quote</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">&#x2715;</button>
+  <div class="mobile-menu-brand">LS Curated Design</div>
+  <a href="#about"     onclick="toggleMenu()">About</a>
+  <a href="#services"  onclick="toggleMenu()">Services</a>
+  <a href="#portfolio" onclick="toggleMenu()">Portfolio</a>
+  <a href="#contact"   onclick="toggleMenu()">Contact</a>
+  <a href="#quote" class="m-cta" onclick="toggleMenu()">Request a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Luxury Interior Design &middot; St. Louis, MO</div>
+    <h1 class="hero-title">Spaces that tell<br><em>your</em> story.</h1>
+    <p class="hero-sub">LS Curated Design transforms ordinary rooms into curated environments that reflect who you are. From concept to completion, every detail is intentional.</p>
+    <div class="hero-btns">
+      <a href="#quote"     class="btn-green">Request a Quote</a>
+      <a href="#portfolio" class="btn-ghost">View Portfolio</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-val">100%</div><div class="stat-lbl">Client Satisfaction</div></div>
+    <div class="stat-item"><div class="stat-val">LLC</div><div class="stat-lbl">Licensed &amp; Insured</div></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">Residential Design</div>
+  <div class="trust-item">Commercial Interiors</div>
+  <div class="trust-item">Space Planning</div>
+  <div class="trust-item">Full-Service Styling</div>
+  <div class="trust-item">St. Louis, MO</div>
+</div>
+
+<!-- ABOUT -->
+<section class="section about-bg" id="about">
+  <div class="section-inner">
+    <div class="about-inner">
+      <div class="about-img reveal">
+        <img class="about-img-main" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=85&fit=crop" alt="Luxury interior design living room">
+        <img class="about-img-accent" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=85&fit=crop" alt="Curated interior detail">
+        <div class="about-badge">
+          <div class="about-badge-num">LS</div>
+          <div class="about-badge-lbl">Curated Design</div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <span class="section-eyebrow">About the Studio</span>
+        <h2 class="section-title">Design with <em>intention.</em><br>Style with precision.</h2>
+        <p class="section-sub">LS Curated Design, LLC is a St. Louis-based interior design studio dedicated to creating spaces that are both beautiful and deeply personal. Every project begins with listening &mdash; understanding your lifestyle, your vision, and what home truly means to you.</p>
+        <div class="about-values">
+          <div class="about-value"><div class="value-line"></div><div class="value-text"><strong>Curated Aesthetic</strong> Every element selected with purpose &mdash; nothing excess, nothing missing.</div></div>
+          <div class="about-value"><div class="value-line"></div><div class="value-text"><strong>Client-Centered Process</strong> Your vision drives every decision from the first consultation to final install.</div></div>
+          <div class="about-value"><div class="value-line"></div><div class="value-text"><strong>Full-Service Execution</strong> From mood boards to sourcing to styling &mdash; handled with care.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-bg" id="services">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">What We Offer</span>
+      <h2 class="section-title">Services designed to <em>elevate</em></h2>
+      <p class="section-sub">Whether you need a single room refresh or a full home transformation, LS Curated Design delivers an experience as refined as the result.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-name">Interior Design Consultation</div>
+        <p class="service-desc">A focused session to assess your space, discuss your goals, and develop a clear direction for your project. Ideal for homeowners who need expert guidance before committing to a full redesign.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-name">Full Room Design</div>
+        <p class="service-desc">Complete design of one or more rooms including layout planning, furniture selection, color palette, lighting, textiles, and accessories &mdash; all sourced and coordinated for you.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-name">Space Planning</div>
+        <p class="service-desc">Strategic analysis and redesign of your floor plan to maximize flow, function, and visual impact without changing your architecture.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-name">Color Consultation</div>
+        <p class="service-desc">Expert color strategy for your walls, finishes, fabrics, and accents. Achieve the mood you want &mdash; calm, bold, warm, dramatic &mdash; with confidence.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-name">Furniture &amp; Decor Sourcing</div>
+        <p class="service-desc">Access to trade-exclusive vendors and curated product recommendations. We handle procurement, tracking, and delivery coordination so you don&rsquo;t have to.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <div class="service-name">Staging &amp; Styling</div>
+        <p class="service-desc">Professional home staging for sale, rental, or simply elevating your everyday environment. Thoughtful arrangement and accessory styling that photographs beautifully.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">How It Works</span>
+      <h2 class="section-title">A seamless process,<br>start to finish.</h2>
+      <p class="section-sub">Four clear steps from your first inquiry to a fully transformed space.</p>
+    </div>
+    <div class="process-grid reveal">
+      <div class="process-step">
+        <div class="process-step-num">01</div>
+        <div class="process-step-name">Discovery Call</div>
+        <p class="process-step-desc">We start with a conversation about your space, your style, and your goals. No commitment &mdash; just clarity.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">02</div>
+        <div class="process-step-name">Design Concept</div>
+        <p class="process-step-desc">A custom mood board, layout plan, and curated selections are presented for your feedback and approval.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">03</div>
+        <div class="process-step-name">Sourcing &amp; Procurement</div>
+        <p class="process-step-desc">Once approved, we source every piece, manage orders, and coordinate deliveries on your behalf.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">04</div>
+        <div class="process-step-name">Installation &amp; Reveal</div>
+        <p class="process-step-desc">We install, style, and present your finished space &mdash; ready for you to enjoy the moment you walk in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO / BEFORE & AFTER -->
+<section class="section gallery-bg" id="portfolio">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">Portfolio</span>
+      <h2 class="section-title">Before &amp; After</h2>
+      <p class="section-sub">Drag the slider to reveal the transformation. Each project is a testament to what thoughtful design can achieve.</p>
+    </div>
+    <div class="gallery-grid reveal" id="galleryGrid">
+      <!-- Loaded dynamically + placeholder fallbacks below -->
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section class="section quote-bg" id="quote">
+  <div class="section-inner">
+    <div class="quote-inner">
+      <div class="quote-info reveal">
+        <span class="section-eyebrow">Get Started</span>
+        <h2 class="section-title">Request a <em>quote</em></h2>
+        <p class="section-sub">Tell us about your project. Lakeesha will review your request and respond within 1&ndash;2 business days.</p>
+        <div class="quote-info-item"><div class="qi-line"></div><div class="qi-text"><strong>No-Obligation Consultation</strong>Your quote request is the first step &mdash; no commitment required until you&rsquo;re ready to move forward.</div></div>
+        <div class="quote-info-item"><div class="qi-line"></div><div class="qi-text"><strong>Serving St. Louis &amp; Surrounding Areas</strong>Available for in-person and virtual consultations.</div></div>
+        <div class="quote-info-item"><div class="qi-line"></div><div class="qi-text"><strong>Response Time</strong>All inquiries answered within 1&ndash;2 business days.</div></div>
+      </div>
+      <div class="reveal">
+        <div class="form-box">
+          <div class="form-grid">
+            <div class="field"><label>First Name *</label><input type="text" id="fname" placeholder="Denise"></div>
+            <div class="field"><label>Last Name *</label><input type="text" id="lname" placeholder="Williams"></div>
+            <div class="field"><label>Email Address *</label><input type="email" id="email" placeholder="you@email.com"></div>
+            <div class="field"><label>Phone Number</label><input type="tel" id="phone" placeholder="(314) 000-0000"></div>
+            <div class="field form-full">
+              <label>Service Interested In</label>
+              <select id="service">
+                <option value="">Select a service...</option>
+                <option>Interior Design Consultation</option>
+                <option>Full Room Design</option>
+                <option>Space Planning</option>
+                <option>Color Consultation</option>
+                <option>Furniture &amp; Decor Sourcing</option>
+                <option>Staging &amp; Styling</option>
+                <option>Full Home Redesign</option>
+                <option>Not Sure &mdash; Let&rsquo;s Talk</option>
+              </select>
+            </div>
+            <div class="field form-full">
+              <label>Rooms / Spaces Involved</label>
+              <input type="text" id="rooms" placeholder="e.g. Living room, master bedroom, dining room">
+            </div>
+            <div class="field">
+              <label>Desired Timeline</label>
+              <select id="timeline">
+                <option value="">Select...</option>
+                <option>As soon as possible</option>
+                <option>Within 1 month</option>
+                <option>1&ndash;3 months</option>
+                <option>3&ndash;6 months</option>
+                <option>Flexible / Planning ahead</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Approximate Budget</label>
+              <select id="budget">
+                <option value="">Select a range...</option>
+                <option>Under $2,500</option>
+                <option>$2,500 &ndash; $5,000</option>
+                <option>$5,000 &ndash; $10,000</option>
+                <option>$10,000 &ndash; $25,000</option>
+                <option>$25,000+</option>
+                <option>Prefer to discuss</option>
+              </select>
+            </div>
+            <div class="field form-full">
+              <label>Tell Us About Your Vision</label>
+              <textarea id="notes" placeholder="Describe your space, your style inspiration, what you love and what you want to change..."></textarea>
+            </div>
+          </div>
+          <button class="btn-submit" id="submitBtn" onclick="submitQuote()">Send My Request</button>
+          <p class="form-note">Or reach us directly: <a href="tel:3144924337">314-492-4337</a> &nbsp;&middot;&nbsp; <a href="mailto:lakeesha@lscurateddesign.com">lakeesha@lscurateddesign.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-bg" id="contact">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">Contact</span>
+      <h2 class="section-title">Get in touch</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <div class="contact-value"><a href="tel:3144924337">314-492-4337</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <div class="contact-value"><a href="mailto:lakeesha@lscurateddesign.com">lakeesha@lscurateddesign.com</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Location</span>
+        <div class="contact-value">St. Louis, MO<br><span style="font-size:0.82rem;font-style:normal;color:rgba(244,239,230,0.4);">Serving St. Louis &amp; Surrounding Areas</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">LS Curated Design, LLC</div>
+    <div class="footer-sub">Luxury Interior Design &middot; St. Louis, MO</div>
+  </div>
+  <div class="footer-right">
+    <div>&copy; 2026 LS Curated Design, LLC. All rights reserved.</div>
+    <div>314-492-4337 &nbsp;&middot;&nbsp; lakeesha@lscurateddesign.com</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Mobile Menu ──────────────────────────────────────────────────────────────
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu')
+  const btn  = document.getElementById('hamburger')
+  const open = menu.classList.toggle('open')
+  btn.classList.toggle('open', open)
+  document.body.style.overflow = open ? 'hidden' : ''
+}
+
+// ── Reveal on scroll ─────────────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } })
+}, { threshold: 0.07 })
+document.querySelectorAll('.reveal').forEach(r => observer.observe(r))
+
+// ── Toast ────────────────────────────────────────────────────────────────────
+function showToast(msg, isError) {
+  const t = document.getElementById('toast')
+  t.textContent = msg
+  t.className = 'toast' + (isError ? ' error' : '') + ' show'
+  setTimeout(() => t.classList.remove('show'), 5500)
+}
+
+// ── Gallery ──────────────────────────────────────────────────────────────────
+// Placeholder pairs used when no real images are uploaded yet
+const PLACEHOLDER_PAIRS = [
+  {
+    label:  'Living Room Transformation',
+    before: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80&fit=crop',
+    after:  'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80&fit=crop'
+  },
+  {
+    label:  'Master Bedroom Redesign',
+    before: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800&q=80&fit=crop',
+    after:  'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80&fit=crop'
+  },
+  {
+    label:  'Dining Room Elevation',
+    before: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80&fit=crop',
+    after:  'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80&fit=crop'
+  },
+  {
+    label:  'Home Office Refresh',
+    before: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=800&q=80&fit=crop',
+    after:  'https://images.unsplash.com/photo-1618221381711-42ca8ab6e908?w=800&q=80&fit=crop'
+  }
+]
+
+async function loadGallery() {
+  const grid = document.getElementById('galleryGrid')
+  let pairs = []
+  try {
+    const res = await fetch('/api/gallery')
+    if (res.ok) pairs = await res.json()
+  } catch {}
+
+  if (pairs.length === 0) pairs = PLACEHOLDER_PAIRS
+
+  grid.innerHTML = pairs.map((p, i) => `
+    <div>
+      <div class="ba-wrap" id="ba${i}" data-active="false">
+        <div class="ba-after">
+          <img src="${p.after}" alt="${p.label} — After" loading="lazy">
+        </div>
+        <div class="ba-before" id="ba-before${i}" style="width:50%">
+          <img src="${p.before}" alt="${p.label} — Before" loading="lazy" style="min-width:200%">
+        </div>
+        <div class="ba-divider" id="ba-div${i}" style="left:50%">
+          <div class="ba-handle">&lt;&gt;</div>
+        </div>
+        <div class="ba-labels">
+          <span class="ba-label before">Before</span>
+          <span class="ba-label after">After</span>
+        </div>
+      </div>
+      <div class="ba-project-name">${p.label}</div>
+    </div>
+  `).join('')
+
+  pairs.forEach((_, i) => initSlider(i))
+}
+
+function initSlider(i) {
+  const wrap = document.getElementById('ba' + i)
+  if (!wrap) return
+
+  function setPosition(pct) {
+    pct = Math.max(2, Math.min(98, pct))
+    document.getElementById('ba-before' + i).style.width = pct + '%'
+    document.getElementById('ba-div'    + i).style.left  = pct + '%'
+  }
+
+  function getX(e) {
+    return e.touches ? e.touches[0].clientX : e.clientX
+  }
+
+  function onMove(e) {
+    if (wrap.dataset.active !== 'true') return
+    e.preventDefault()
+    const rect = wrap.getBoundingClientRect()
+    const pct  = ((getX(e) - rect.left) / rect.width) * 100
+    setPosition(pct)
+  }
+
+  wrap.addEventListener('mousedown',  e => { wrap.dataset.active = 'true'; onMove(e) })
+  wrap.addEventListener('touchstart', e => { wrap.dataset.active = 'true'; onMove(e) }, { passive:false })
+  window.addEventListener('mousemove',  onMove)
+  window.addEventListener('touchmove',  onMove, { passive:false })
+  window.addEventListener('mouseup',  () => wrap.dataset.active = 'false')
+  window.addEventListener('touchend', () => wrap.dataset.active = 'false')
+}
+
+loadGallery()
+
+// ── Quote Form ───────────────────────────────────────────────────────────────
+async function submitQuote() {
+  const fname = document.getElementById('fname').value.trim()
+  const lname = document.getElementById('lname').value.trim()
+  const email = document.getElementById('email').value.trim()
+  if (!fname || !email) { showToast('Please enter your name and email.', true); return }
+
+  const btn = document.getElementById('submitBtn')
+  btn.disabled = true; btn.textContent = 'Sending...'
+
+  try {
+    const res = await fetch('/api/quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fname, lname, email,
+        phone:    document.getElementById('phone').value.trim(),
+        service:  document.getElementById('service').value,
+        rooms:    document.getElementById('rooms').value.trim(),
+        timeline: document.getElementById('timeline').value,
+        budget:   document.getElementById('budget').value,
+        notes:    document.getElementById('notes').value.trim()
+      })
+    })
+    if (res.ok) {
+      showToast('Request sent! Lakeesha will be in touch within 1-2 business days.')
+      document.querySelectorAll('#quote input, #quote select, #quote textarea').forEach(el => el.value = '')
+    } else {
+      showToast('Something went wrong. Call 314-492-4337 or email directly.', true)
+    }
+  } catch {
+    showToast('Something went wrong. Call 314-492-4337 or email directly.', true)
+  } finally {
+    btn.disabled = false; btn.textContent = 'Send My Request'
+  }
+}
+</script>
+</body>
+</html>
