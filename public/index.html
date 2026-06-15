@@ -273,31 +273,50 @@
     nav { padding:0.9rem 1.25rem; }
     .nav-links { display:none; }
     .hamburger { display:flex; }
-    .hero-content { padding:0 1.5rem 4rem; }
+    .hero-content { padding:0 1.5rem 4.5rem; }
     .hero-stats { display:none; }
     .section { padding:4rem 1.25rem; }
-    .trust-bar { padding:1rem 1.25rem; gap:1.5rem; }
-    .about-inner { grid-template-columns:1fr; gap:3rem; }
+    .trust-bar { padding:0.85rem 1.25rem; gap:1.2rem; }
+    .trust-item { font-size:0.65rem; }
+    .about-inner { grid-template-columns:1fr; gap:2.5rem; }
     .about-img-accent { display:none; }
     .about-badge { top:1rem; left:1rem; }
+    .about-img-main { aspect-ratio:4/3; }
     .services-grid { grid-template-columns:1fr 1fr; }
     .process-grid { grid-template-columns:1fr 1fr; }
     .process-step { border-right:none; border-bottom:1px solid rgba(244,239,230,0.08); }
     .gallery-grid { grid-template-columns:1fr; }
-    .quote-inner { grid-template-columns:1fr; gap:2.5rem; }
+    .quote-inner { grid-template-columns:1fr; gap:2rem; }
     .quote-info { position:static; }
+    .form-box { padding:1.75rem 1.25rem; }
     .contact-grid { grid-template-columns:1fr; }
-    .contact-item { border-right:none; border-bottom:1px solid rgba(244,239,230,0.06); }
+    .contact-item { padding:1.75rem 1.25rem; border-right:none; border-bottom:1px solid rgba(244,239,230,0.06); }
     .contact-item:last-child { border-bottom:none; }
     footer { flex-direction:column; text-align:center; padding:2rem 1.25rem; }
     .footer-right { text-align:center; }
+    .toast { left:1rem; right:1rem; max-width:none; bottom:1.25rem; }
   }
   @media(max-width:560px) {
+    .nav-name { font-size:0.88rem; }
+    .nav-sub  { display:none; }
+    .hero-title { font-size:clamp(2.4rem,10vw,3.5rem); }
+    .hero-eyebrow { font-size:0.6rem; letter-spacing:0.2em; }
+    .hero-btns { flex-direction:column; align-items:flex-start; }
+    .btn-green, .btn-ghost { text-align:center; width:100%; max-width:280px; }
     .services-grid { grid-template-columns:1fr; }
+    .service-card { padding:2rem 1.5rem; }
     .process-grid { grid-template-columns:1fr; }
+    .process-step { padding:1.75rem 1.5rem; }
     .form-grid { grid-template-columns:1fr; }
-    .hero-btns { flex-direction:column; }
-    .btn-green, .btn-ghost { text-align:center; }
+    .form-box { padding:1.5rem 1rem; }
+    .quote-info-item { gap:0.75rem; }
+    .section-title { font-size:clamp(1.7rem,7vw,2.4rem); }
+    .gallery-grid { gap:1rem; }
+    .contact-value { font-size:0.95rem; }
+  }
+  /* iOS: prevent zoom on input focus */
+  @media(max-width:768px) {
+    .field input, .field select, .field textarea { font-size:16px; }
   }
 </style>
 </head>
