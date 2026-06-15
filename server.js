@@ -8,8 +8,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app  = express()
 const PORT = process.env.PORT || 3005
 
-const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL    || 'lakeesha@lscurateddesign.com'
-const GMAIL_USER   = process.env.GMAIL_USER       || 'lakeesha@lscurateddesign.com'
+const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL    || 'squireslakeesha@gmail.com'
+const GMAIL_USER   = process.env.GMAIL_USER       || 'squireslakeesha@gmail.com'
 const GMAIL_PASS   = process.env.GMAIL_APP_PASSWORD
 
 function getTransporter() {
