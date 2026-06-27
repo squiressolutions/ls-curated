@@ -95,7 +95,7 @@ app.post('/api/quote', async (req, res) => {
       </div>` : ''}
 
       <div style="margin-top:16px;text-align:center;">
-        <a href="mailto:${email}?subject=Re: Your LS Curated Design Inquiry&body=Hi ${fname},%0A%0AThank you for reaching out to LS Curated Design! I've received your project inquiry and will be in touch shortly to discuss your vision.%0A%0AWarm regards,%0ALakeesha%0ALS Curated Design, LLC"
+        <a href="mailto:${email}?subject=Re: Your LS Curated Design Inquiry&body=Hi ${fname},%0A%0AThank you for reaching out to LS Curated Design! I've received your project inquiry and will be in touch shortly to discuss your vision.%0A%0AWarm regards,%0ALaKeesha%0ALS Curated Design, LLC"
           style="display:inline-block;background:#3a5740;color:#f4efe6;padding:10px 24px;border-radius:4px;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:1px;">
           REPLY TO ${fname ? fname.toUpperCase() : name.toUpperCase()}
         </a>
