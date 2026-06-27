@@ -176,11 +176,10 @@
   .ba-after { position:absolute; inset:0; }
   .ba-after img { width:100%; height:100%; object-fit:cover; }
   .ba-before {
-    position:absolute; inset:0; overflow:hidden;
-    width:50%;
-    transition:none;
+    position:absolute; inset:0;
+    clip-path:inset(0 50% 0 0);
   }
-  .ba-before img { width:100%; height:100%; object-fit:cover; min-width:200%; }
+  .ba-before img { width:100%; height:100%; object-fit:cover; }
   .ba-divider {
     position:absolute; top:0; bottom:0; left:50%;
     width:2px; background:rgba(244,239,230,0.9);
@@ -831,8 +830,8 @@ async function loadGallery() {
         <div class="ba-after">
           <img src="${p.after}" alt="${p.label} — After" loading="lazy">
         </div>
-        <div class="ba-before" id="ba-before${i}" style="width:50%">
-          <img src="${p.before}" alt="${p.label} — Before" loading="lazy" style="min-width:200%">
+        <div class="ba-before" id="ba-before${i}">
+          <img src="${p.before}" alt="${p.label} — Before" loading="lazy">
         </div>
         <div class="ba-divider" id="ba-div${i}" style="left:50%">
           <div class="ba-handle">&lt;&gt;</div>
@@ -876,8 +875,8 @@ function initSlider(i) {
 
   function setPosition(pct) {
     pct = Math.max(2, Math.min(98, pct))
-    document.getElementById('ba-before' + i).style.width = pct + '%'
-    document.getElementById('ba-div'    + i).style.left  = pct + '%'
+    document.getElementById('ba-before' + i).style.clipPath = `inset(0 ${100 - pct}% 0 0)`
+    document.getElementById('ba-div'    + i).style.left     = pct + '%'
   }
 
   function getX(e) {
