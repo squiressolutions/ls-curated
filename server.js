@@ -29,15 +29,25 @@ app.get('/api/gallery', (req, res) => {
   const galleryDir = path.join(__dirname, 'public', 'gallery')
   try {
     const files   = fs.readdirSync(galleryDir).filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f))
+    // First try to build before/after pairs
     const befores = files.filter(f => f.includes('-before.'))
+    const paired  = new Set()
     const pairs   = befores.map(b => {
       const prefix = b.replace(/-before\.[^.]+$/, '')
-      const ext    = b.split('.').pop()
       const after  = files.find(f => f.startsWith(prefix + '-after.'))
       const label  = prefix.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
-      return after ? { label, before: `/gallery/${b}`, after: `/gallery/${after}` } : null
+      if (after) { paired.add(b); paired.add(after) }
+      return after ? { type: 'pair', label, before: `/gallery/${b}`, after: `/gallery/${after}` } : null
     }).filter(Boolean)
-    res.json(pairs)
+    // Remaining single images returned as portfolio photos
+    const singles = files
+      .filter(f => !paired.has(f) && !f.includes('-before.') && !f.includes('-after.'))
+      .map(f => {
+        const base  = f.replace(/\.[^.]+$/, '')
+        const label = base.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+        return { type: 'single', label, src: `/gallery/${f}` }
+      })
+    res.json([...pairs, ...singles])
   } catch {
     res.json([])
   }

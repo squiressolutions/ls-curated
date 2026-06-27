@@ -77,7 +77,7 @@
   }
   .hero-bg {
     position:absolute; inset:0;
-    background:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=85&fit=crop') center/cover no-repeat;
+    background:url('/gallery/portfolio-04.jpg') center/cover no-repeat;
     opacity:0.45;
   }
   .hero-overlay {
@@ -479,8 +479,8 @@
   <div class="section-inner">
     <div class="about-inner">
       <div class="about-img reveal">
-        <img class="about-img-main" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=85&fit=crop" alt="Luxury interior design living room">
-        <img class="about-img-accent" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=85&fit=crop" alt="Curated interior detail">
+        <img class="about-img-main" src="/gallery/portfolio-01.jpg" alt="LS Curated Design — interior project">
+        <img class="about-img-accent" src="/gallery/portfolio-02.jpg" alt="LS Curated Design — interior detail">
         <div class="about-badge">
           <div class="about-badge-num">LS</div>
           <div class="about-badge-lbl">Curated Design</div>
@@ -490,6 +490,7 @@
         <span class="section-eyebrow">About the Studio</span>
         <h2 class="section-title">Design with <em>intention.</em><br>Style with precision.</h2>
         <p class="section-sub">LS Curated Design, LLC is a St. Louis-based interior design studio dedicated to creating spaces that are both beautiful and deeply personal. Every project begins with listening &mdash; understanding your lifestyle, your vision, and what home truly means to you.</p>
+        <p class="section-sub" style="margin-top:1rem;">I specialize in elevating your space.....one room at a time. Call for any questions!</p>
         <div class="about-values">
           <div class="about-value"><div class="value-line"></div><div class="value-text"><strong>Curated Aesthetic</strong> Every element selected with purpose &mdash; nothing excess, nothing missing.</div></div>
           <div class="about-value"><div class="value-line"></div><div class="value-text"><strong>Client-Centered Process</strong> Your vision drives every decision from the first consultation to final install.</div></div>
@@ -656,7 +657,7 @@
             </div>
           </div>
           <button class="btn-submit" id="submitBtn" onclick="submitQuote()">Send My Request</button>
-          <p class="form-note">Or reach us directly: <a href="tel:3146080012">314-608-0012</a> &nbsp;&middot;&nbsp; <a href="mailto:lakeesha@lscurateddesign.com">lakeesha@lscurateddesign.com</a></p>
+          <p class="form-note">Or reach us directly: <a href="tel:3144924337">314-492-4337</a> &nbsp;&middot;&nbsp; <a href="mailto:lakeesha@lscurateddesign.com">lakeesha@lscurateddesign.com</a></p>
         </div>
       </div>
     </div>
@@ -673,7 +674,7 @@
     <div class="contact-grid reveal">
       <div class="contact-item">
         <span class="contact-label">Phone</span>
-        <div class="contact-value"><a href="tel:3146080012">314-608-0012</a></div>
+        <div class="contact-value"><a href="tel:3144924337">314-492-4337</a></div>
       </div>
       <div class="contact-item">
         <span class="contact-label">Email</span>
@@ -695,7 +696,7 @@
   </div>
   <div class="footer-right">
     <div>&copy; 2026 LS Curated Design, LLC. All rights reserved.</div>
-    <div>314-608-0012 &nbsp;&middot;&nbsp; lakeesha@lscurateddesign.com</div>
+    <div>314-492-4337 &nbsp;&middot;&nbsp; lakeesha@lscurateddesign.com</div>
   </div>
 </footer>
 
@@ -757,41 +758,24 @@ function showToast(msg, isError) {
 }
 
 // ── Gallery ──────────────────────────────────────────────────────────────────
-// Placeholder pairs used when no real images are uploaded yet
-const PLACEHOLDER_PAIRS = [
-  {
-    label:  'Living Room Transformation',
-    before: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80&fit=crop',
-    after:  'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80&fit=crop'
-  },
-  {
-    label:  'Master Bedroom Redesign',
-    before: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800&q=80&fit=crop',
-    after:  'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80&fit=crop'
-  },
-  {
-    label:  'Dining Room Elevation',
-    before: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80&fit=crop',
-    after:  'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80&fit=crop'
-  },
-  {
-    label:  'Home Office Refresh',
-    before: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=800&q=80&fit=crop',
-    after:  'https://images.unsplash.com/photo-1618221381711-42ca8ab6e908?w=800&q=80&fit=crop'
-  }
-]
-
 async function loadGallery() {
   const grid = document.getElementById('galleryGrid')
-  let pairs = []
+  let items = []
   try {
     const res = await fetch('/api/gallery')
-    if (res.ok) pairs = await res.json()
+    if (res.ok) items = await res.json()
   } catch {}
 
-  if (pairs.length === 0) pairs = PLACEHOLDER_PAIRS
+  if (items.length === 0) {
+    grid.innerHTML = '<div class="gallery-empty"><p>Portfolio coming soon.</p></div>'
+    return
+  }
 
-  grid.innerHTML = pairs.map((p, i) => `
+  const pairs   = items.filter(it => it.type === 'pair')
+  const singles = items.filter(it => it.type === 'single')
+
+  // Render before/after pairs
+  const pairHTML = pairs.map((p, i) => `
     <div>
       <div class="ba-wrap" id="ba${i}" data-active="false">
         <div class="ba-after">
@@ -812,7 +796,41 @@ async function loadGallery() {
     </div>
   `).join('')
 
+  // Render single portfolio photos
+  const singleHTML = singles.length ? `
+    <div style="grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:${pairs.length?'1rem':'0'}">
+      ${singles.map(s => `
+        <div style="overflow:hidden;border-radius:4px;aspect-ratio:4/3;background:#1c1c1c;cursor:pointer;" onclick="openLightbox('${s.src}','${s.label}')">
+          <img src="${s.src}" alt="${s.label}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+        </div>
+      `).join('')}
+    </div>
+  ` : ''
+
+  grid.innerHTML = pairHTML + singleHTML
   pairs.forEach((_, i) => initSlider(i))
+
+  // Hover lift on single photos
+  grid.querySelectorAll('[onclick^="openLightbox"] img').forEach(img => {
+    img.parentElement.addEventListener('mouseenter', () => img.style.transform = 'scale(1.05)')
+    img.parentElement.addEventListener('mouseleave', () => img.style.transform = 'scale(1)')
+  })
+}
+
+// ── Lightbox ──────────────────────────────────────────────────────────────────
+function openLightbox(src, label) {
+  let lb = document.getElementById('lb')
+  if (!lb) {
+    lb = document.createElement('div')
+    lb.id = 'lb'
+    lb.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;cursor:zoom-out;'
+    lb.innerHTML = '<img id="lb-img" style="max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px;box-shadow:0 20px 80px rgba(0,0,0,0.8);"><div id="lb-cap" style="position:absolute;bottom:1.5rem;left:0;right:0;text-align:center;color:rgba(244,239,230,0.5);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;"></div>'
+    lb.addEventListener('click', () => lb.remove())
+    document.body.appendChild(lb)
+  }
+  document.getElementById('lb-img').src = src
+  document.getElementById('lb-cap').textContent = label
+  lb.style.display = 'flex'
 }
 
 function initSlider(i) {
@@ -875,10 +893,10 @@ async function submitQuote() {
       showToast('Request sent! Lakeesha will be in touch within 1-2 business days.')
       document.querySelectorAll('#quote input, #quote select, #quote textarea').forEach(el => el.value = '')
     } else {
-      showToast('Something went wrong. Call 314-608-0012 or email directly.', true)
+      showToast('Something went wrong. Call 314-492-4337 or email directly.', true)
     }
   } catch {
-    showToast('Something went wrong. Call 314-608-0012 or email directly.', true)
+    showToast('Something went wrong. Call 314-492-4337 or email directly.', true)
   } finally {
     btn.disabled = false; btn.textContent = 'Send My Request'
   }
