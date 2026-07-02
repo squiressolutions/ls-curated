@@ -78,7 +78,7 @@
   .hero-bg {
     position:absolute; inset:0;
     background:url('/gallery/project-1-after.jpg') center/cover no-repeat;
-    opacity:0.45;
+    opacity:0.65;
   }
   .hero-overlay {
     position:absolute; inset:0;
@@ -496,10 +496,6 @@
     <div class="about-inner">
       <div class="about-img reveal">
         <div class="about-slideshow" id="aboutSlideshow"></div>
-        <div class="about-badge">
-          <div class="about-badge-num">LS</div>
-          <div class="about-badge-lbl">Curated Design</div>
-        </div>
       </div>
       <div class="about-text reveal">
         <span class="section-eyebrow">About the Studio</span>
@@ -791,7 +787,7 @@ function nextHeroBg() {
   heroBgEl.style.opacity = '0'
   setTimeout(() => {
     heroBgEl.style.backgroundImage = `url('${heroImages[heroIdx]}')`
-    heroBgEl.style.opacity         = '0.45'
+    heroBgEl.style.opacity         = '0.65'
   }, 1500)
 }
 
